@@ -1,1 +1,1 @@
-# OSRS-with-robotjs
+# Woodcutting bot for OSRS
