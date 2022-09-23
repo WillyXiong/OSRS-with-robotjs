@@ -23,8 +23,9 @@ function main() {
         dropLogs(); // drops log
     }
 }
-
+// drops logs inside the inventory
 function dropLogs() {
+    // x and y pixel coordinates of the log in the inventory
     var inventory_x = 1755;
     var inventory_y = 795;
     var inventory_log_color = "654723";
@@ -54,11 +55,14 @@ function dropLogs() {
 }
 
 function findTree() {
+    // screen size when looking for a tree
     var x = 300, y = 300, width = 1300, height = 400;
     var img = robot.screen.capture(x, y, width, height);
 
+    // used hex colors to locate tree
     var tree_colors = ["78552B", "453019", "7B572B", "715129", "74532A", "624522"];
 
+    // searches for a tree, if tree found cut the tree, if not move game camera until tree found
     for (var i = 0; i < 500; i++) {
         var random_x = getRandomInt(0, width - 1);
         var random_y = getRandomInt(0, height - 1);
@@ -81,6 +85,7 @@ function findTree() {
     return false;
 }
 
+// rotate camera if there is no tree around
 function rotateCamera() {
     console.log("Rotating Camera");
     robot.keyToggle('right', 'down');
@@ -88,6 +93,7 @@ function rotateCamera() {
     robot.keyToggle('right', 'up');
 }
 
+// confirm a tree is found if color is found on top left screen
 function confirmTree(screen_x, screen_y) {
     // first move the mouse to the given coordinates
     robot.moveMouse(screen_x, screen_y);
@@ -101,11 +107,11 @@ function confirmTree(screen_x, screen_y) {
 
     return pixel_color == "00D7D7";
 }
-
+// let mouse sleep
 function sleep(ms) {
     Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 }
-
+// getting random pixel number to locate tree
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
